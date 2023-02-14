@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @SpringBootTest
-@Transactional
 class MemberControllerTest {
 
     @Autowired
@@ -23,7 +22,7 @@ class MemberControllerTest {
         Member member1 = Member.builder()
                 .name("member-1")
                 .password("1")
-                .roles(MEMBER_ROLES.ROLE_ADMIN)
+                .roles(MEMBER_ROLES.ADMIN)
                 .build();
 
         Long memberId = memberService.saveMember(member1);
@@ -37,7 +36,7 @@ class MemberControllerTest {
             Member member = Member.builder()
                     .name("member-" + i)
                     .password(String.valueOf(i))
-                    .roles(MEMBER_ROLES.ROLE_ADMIN)
+                    .roles(MEMBER_ROLES.ADMIN)
                     .build();
 
             memberService.saveMember(member);
@@ -53,7 +52,7 @@ class MemberControllerTest {
         Member member1 = Member.builder()
                 .name("member-1")
                 .password("1")
-                .roles(MEMBER_ROLES.ROLE_ADMIN)
+                .roles(MEMBER_ROLES.ADMIN)
                 .build();
 
         memberService.saveMember(member1);
@@ -61,7 +60,7 @@ class MemberControllerTest {
         Member member2 = Member.builder()
                 .name("member-2")
                 .password("2")
-                .roles(MEMBER_ROLES.ROLE_ADMIN)
+                .roles(MEMBER_ROLES.ADMIN)
                 .build();
 
         memberService.saveMember(member2);
