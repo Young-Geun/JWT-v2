@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -34,6 +35,13 @@ public class MemberService {
      */
     public Member findMember(Long memberId) {
         return memberRepository.findByMemberId(memberId);
+    }
+
+    /**
+     * 회원 조회 (로그인용)
+     */
+    public Optional<Member> findMemberByNameAndPassword(String name, String password) {
+        return memberRepository.findByNameAndPassword(name, password);
     }
 
 }
