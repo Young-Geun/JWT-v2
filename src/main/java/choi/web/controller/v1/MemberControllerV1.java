@@ -1,4 +1,4 @@
-package choi.web.controller;
+package choi.web.controller.v1;
 
 import choi.web.domain.Member;
 import choi.web.jwt.JwtTokenProvider;
@@ -8,9 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+
 @RestController
 @RequiredArgsConstructor
-public class MemberController {
+public class MemberControllerV1 {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final MemberService memberService;
@@ -20,7 +22,7 @@ public class MemberController {
     /**
      * 회원 등록
      */
-    @PostMapping("/members")
+    @PostMapping("/v1/members")
     public ResponseEntity saveMember(@RequestBody Member member) {
         memberService.saveMember(member);
         return ResponseEntity
@@ -31,7 +33,7 @@ public class MemberController {
     /**
      * 회원 전체 조회
      */
-    @GetMapping("/members")
+    @GetMapping("/v1/members")
     public ResponseEntity findMember() {
         return ResponseEntity
                 .ok()
@@ -41,7 +43,7 @@ public class MemberController {
     /**
      * 회원 조회
      */
-    @GetMapping("/members/{memberId}")
+    @GetMapping("/v1/members/{memberId}")
     public ResponseEntity findMember(@PathVariable("memberId") Long id) {
         return ResponseEntity
                 .ok()
@@ -51,12 +53,13 @@ public class MemberController {
     /**
      * 로그인
      */
-    @PostMapping("/login")
+    @PostMapping("/v1/login")
     public ResponseEntity login(@RequestBody Member member) {
-        if (memberService.findMemberByNameAndPassword(member.getName(), member.getPassword()).isPresent()) {
+        Member findMember = memberService.findMemberByNameAndPassword(member.getName(), member.getPassword());
+        if (findMember != null) {
             return ResponseEntity
                     .ok()
-                    .body(jwtTokenProvider.createToken(String.valueOf(member.getMemberId())));
+                    .body(jwtTokenProvider.createToken(String.valueOf(findMember.getMemberId()), Arrays.asList(findMember.getRoles().toString())));
         } else {
             return ResponseEntity
                     .status(HttpStatus.UNAUTHORIZED)

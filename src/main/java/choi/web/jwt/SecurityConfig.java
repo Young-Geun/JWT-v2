@@ -26,10 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.httpBasic().disable()
                 .authorizeRequests()// 요청에 대한 사용권한 체크
-                .antMatchers("/api/v1/user/**")
-                .hasAnyRole("USER", "ADMIN")
-                .antMatchers("/api/v1/admin/**")
-                .hasRole("ADMIN")
+                .antMatchers("/v1/user/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/v1/admin/**").hasAuthority("ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);

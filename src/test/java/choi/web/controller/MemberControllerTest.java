@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ class MemberControllerTest {
     @Test
     public void save() {
         Member member1 = Member.builder()
-                .name("member-1")
+                .name("admin")
                 .password("1")
                 .roles(MEMBER_ROLES.ADMIN)
                 .build();
@@ -36,7 +35,7 @@ class MemberControllerTest {
             Member member = Member.builder()
                     .name("member-" + i)
                     .password(String.valueOf(i))
-                    .roles(MEMBER_ROLES.ADMIN)
+                    .roles(MEMBER_ROLES.USER)
                     .build();
 
             memberService.saveMember(member);
