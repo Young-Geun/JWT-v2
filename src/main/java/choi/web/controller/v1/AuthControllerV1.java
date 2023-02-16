@@ -16,7 +16,7 @@ public class AuthControllerV1 {
     public ResponseEntity accessUser() {
         return ResponseEntity
                 .ok()
-                .body("Welcome User Page");
+                .body("Hello User World!");
     }
 
     /**
@@ -26,7 +26,7 @@ public class AuthControllerV1 {
     public ResponseEntity accessAdmin() {
         return ResponseEntity
                 .ok()
-                .body("Welcome Admin Page");
+                .body("Hello Admin World!");
     }
 
 }

@@ -45,10 +45,10 @@ public class MemberService implements UserDetailsService {
     }
 
     /**
-     * 회원 조회 (로그인용)
+     * 회원 조회
      */
-    public Member findMemberByNameAndPassword(String name, String password) {
-        return memberRepository.findByNameAndPassword(name, password);
+    public Member findMemberByName(String name) {
+        return memberRepository.findByName(name);
     }
 
     @Override
